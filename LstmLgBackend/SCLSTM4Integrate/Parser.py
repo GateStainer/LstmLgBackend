@@ -1,0 +1,27 @@
+from configparser import SafeConfigParser
+
+class LSTMParser(object):
+    def __init__(self):
+        parser = SafeConfigParser()
+        parser.read('config/sclstm.cfg')
+        self.hidden_dim = parser.getint('generator','hidden_dim')
+        self.num_epochs = parser.getint('generator','num_epochs')
+        self.sequence_length = parser.getint('generator','sequence_length')
+        self.sequences_per_batch = parser.getint('train_mode','sequences_per_batch')
+        self.learning_rate = parser.getfloat('learn','learning_rate')
+        self.momentum_as_time_constant = parser.getint('learn','momentum_as_time_constant')
+        self.clipping_threshold_per_sample = parser.getfloat('learn','clipping_threshold_per_sample')
+        self.token_to_id_path = parser.get('data','token_to_id_path')
+        self.slot_value_path = parser.get('data','slot_value_path')
+        self.train_file_path = parser.get('data','train_file_path')
+        self.sv_file_path = parser.get('data','sv_file_path')
+        self.model_file_path = parser.get('data','model_file_path')
+        self.test_file_path = parser.get('data','test_file_path')
+        self.sv_test_file_path = parser.get('data','sv_test_file_path')
+        self.segment_begin = parser.get('generator','segment_begin')
+        self.segment_end = parser.get('generator','segment_end')
+        self.num_samples_between_progress_report = parser.get('train_mode','num_samples_between_progress_report')
+        self.patience = parser.getint('train_mode','patience')
+        self.overgen = parser.getint('gen','overgen')
+        self.beamwidth = parser.getint('gen','beamwidth')
+        self.decode = parser.get('gen','decode')
